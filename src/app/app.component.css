@@ -1,0 +1,27 @@
+.weather-app {
+  margin: auto;
+  margin-top: 50px;
+  width: 50%;
+  padding: 10px;
+}
+
+.weather-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.weather-result {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.weather-full-width {
+  width: 100%;
+  background-color: aliceblue;
+}
+
+.mdc-text-field--filled {
+  background-color: #fbf9f9;    /* replace this color with your accent color hex code */
+}
