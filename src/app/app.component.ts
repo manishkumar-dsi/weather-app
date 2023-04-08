@@ -72,6 +72,9 @@ export class AppComponent {
       obj.subscribe((data: WeatherResponse)=>{
         console.log("Data fetched by city");
         console.log(data);
+        this.latInput = String(data.coord.lat);
+        this.lonInput = String(data.coord.lon);
+        this.changeDetectorRef.detectChanges();
         this.setModelData(data);
       });
       return
