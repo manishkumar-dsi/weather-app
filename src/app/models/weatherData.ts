@@ -59,3 +59,17 @@ export interface Sys {
   sunrise: number
   sunset: number
 }
+
+export interface GraphData {
+  total_inc_front: Map<String, String>
+  total_inc_back: Map<String, String>
+  total_abs_front: Map<String, String>
+  total_abs_back: Map<String, String>
+  labels: Array<String>
+}
+
+export interface GraphDataSet {
+  data: Number[],
+  label: String,
+  type: String
+}

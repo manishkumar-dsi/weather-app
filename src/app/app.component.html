@@ -112,7 +112,7 @@
             <div class="box-header-title">Graph</div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="4">
-            <app-graph  style="height:100%;width:80%"></app-graph>
+            <app-graph [lat]="latInput" [lon] = "lonInput" style="height:100%;width:80%"></app-graph>
           </mat-grid-tile>
         </mat-grid-list>
       </div>

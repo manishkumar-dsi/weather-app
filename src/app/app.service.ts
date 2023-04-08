@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { WeatherResponse } from './models/weatherData';
+import { GraphData, WeatherResponse } from './models/weatherData';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,9 @@ export class AppService {
 
   fetchWeatherByCity(cityName: string): Observable<WeatherResponse> {
     return this.http.get<WeatherResponse>(this.openWeatherURL + '?q=' + cityName + '&appid=' + this.apiKey);
+  }
+
+  fetchGraphData(lat: number, lon: number): Observable<GraphData> {
+    return this.http.get<GraphData>('http://manishkumardsi.pythonanywhere.com?lat=' + lat + '&lon=' + lon);
   }
 }

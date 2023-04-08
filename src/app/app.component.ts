@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from './app.service'
 import { WeatherResponse } from './models/weatherData';
+import { GraphComponent } from './graph/graph.component';
 
 export interface Tile {
   color: string;
@@ -37,6 +38,9 @@ export class AppComponent {
     lat: new FormControl({value: '', disabled: false}),
     lon: new FormControl({value: '', disabled: false}),
   });
+
+  latInput: String = '';
+  lonInput: String = '';
 
   constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef){}
 
@@ -82,8 +86,13 @@ export class AppComponent {
     // Search by coordinate
     let obj = this.appService.fetchWeatherByCoordinate(Number(this.weatherSearchForm.value.lat), Number(this.weatherSearchForm.value.lon));
     obj.subscribe((data: WeatherResponse)=>{
-      console.log("Data fetched")
+      console.log("Data fetched by coordinates")
       console.log(data);
+
+      this.latInput = String(data.coord.lat);
+      this.lonInput = String(data.coord.lon);
+      this.changeDetectorRef.detectChanges();
+
       this.setModelData(data);
     });
   }
