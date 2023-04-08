@@ -20,17 +20,17 @@ export class AppComponent {
   title = 'weather-app';
   searchStart: boolean = false;
   searchEnd: boolean = true;
-  seaLevel: string = '';
-  rain: string = '';
-  sunRise: string = '';
-  groundLevel: string = '';
-  clouds: string = '';
-  sunset: string = '';
-  country: string = '';
-  wind:string = '';
-  tempMax: string = '';
-  tempMin: string = '';
-  timezone: string = '';
+  seaLevel: string = '-';
+  rain: string = '-';
+  sunRise: string = '-';
+  groundLevel: string = '-';
+  clouds: string = '-';
+  sunset: string = '-';
+  country: string = '-';
+  wind:string = '-';
+  tempMax: string = '-';
+  tempMin: string = '-';
+  timezone: string = '-';
 
   weatherSearchForm = new FormGroup({
     city: new FormControl({value: '', disabled: false}),
@@ -92,8 +92,6 @@ export class AppComponent {
   }
 
   disable() {
-    console.log("changing data");
-    console.log(this.weatherSearchForm.value.city);
     if (this.weatherSearchForm.value.city && this.weatherSearchForm.value.city.length > 0) {
       this.weatherSearchForm.controls['lat'].disable();
       this.weatherSearchForm.controls['lon'].disable();

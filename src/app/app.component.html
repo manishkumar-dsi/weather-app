@@ -1,97 +1,121 @@
 <div class="weather-app">
   <h1> Weather App</h1>
+  <mat-grid-list cols="2" rowHeight="325" gutterSize="5px">
+    <mat-grid-tile colspan="2" rowspan="1">
+      <form [formGroup]="weatherSearchForm"  (ngSubmit)="onSubmit()">
+        <div>Search by city:</div>
+        <mat-form-field class="weather-full-width">
+          <mat-label for="city">City: </mat-label>
+          <input matInput id="city" type="text" formControlName="city"  (ngModelChange)="disable()">
+        </mat-form-field>
 
-  <form [formGroup]="weatherSearchForm" class="weather-form" (ngSubmit)="onSubmit()">
-    <div>Search by city:</div>
-    <mat-form-field class="weather-full-width">
-      <mat-label for="city">City: </mat-label>
-      <input matInput id="city" type="text" formControlName="city"  (ngModelChange)="disable()">
-    </mat-form-field>
+        <span>or search by Latitude & Longitude:</span>
+        <mat-form-field class="weather-full-width">
+          <mat-label for="lat">Latitude: </mat-label>
+          <input matInput id="lat" type="number" formControlName="lat"  (ngModelChange)="disable()">
+        </mat-form-field>
+        <mat-form-field class="weather-full-width">
+          <mat-label for="lon">Longitude: </mat-label>
+          <input matInput id="lon" type="number" formControlName="lon"  (ngModelChange)="disable()">
+        </mat-form-field>
 
-    <span>or search by Latitude & Longitude:</span>
-    <mat-form-field class="weather-full-width">
-      <mat-label for="lat">Latitude: </mat-label>
-      <input matInput id="lat" type="number" formControlName="lat"  (ngModelChange)="disable()">
-    </mat-form-field>
-    <mat-form-field class="weather-full-width">
-      <mat-label for="lon">Longitude: </mat-label>
-      <input matInput id="lon" type="number" formControlName="lon"  (ngModelChange)="disable()">
-    </mat-form-field>
+        <button mat-flat-button style="margin-right:20px" color="primary" type="submit" [disabled]="!weatherSearchForm.valid">Search</button>
+        <button mat-flat-button type=reset (onclick)="reset()">Reset</button>
+      </form>
+      <hr style="width: min-content;"/>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <div class="weather-result">
+        <mat-grid-list cols="3" rowHeight="50px" gutterSize="5px">
+          <mat-grid-tile colspan="3" rowspan="1" class="box-header">
+              <div class="box-header-title">Search result</div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div class="weather-result-element-name">Sea Level</div>
+              <span class="weather-result-element-value">{{seaLevel}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Rain</div>
+              <span class="weather-result-element-value">{{rain}}</span>
+            </div>
+          </mat-grid-tile>
 
-    <button mat-flat-button style="margin-right:20px" color="primary" type="submit" [disabled]="!weatherSearchForm.valid">Search</button>
-    <button mat-flat-button type=reset (onclick)="reset()">Reset</button>
-  </form>
-  <hr style="width: min-content;"/>
-  <div class="weather-result">
-    <mat-grid-list cols="3" rowHeight="60px" gutterSize="5px">
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Sea Level</div>
-          <span style="margin-left:30%;">{{seaLevel}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Rain</div>
-          <span style="margin-left:10%;">{{rain}}</span>
-        </div>
-      </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Sun Rise</div>
+              <span class="weather-result-element-value">{{sunRise}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Ground Level</div>
+              <span style="margin-left:30%;">{{groundLevel}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Clouds</div>
+              <span class="weather-result-element-value">{{clouds}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Sunset</div>
+              <span class="weather-result-element-value">{{sunset}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Country</div>
+              <span class="weather-result-element-value">{{country}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Wind</div>
+              <span class="weather-result-element-value">{{wind}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Temperature (Max)</div>
+              <span class="weather-result-element-value">{{tempMax}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Timezone</div>
+              <span class="weather-result-element-value">{{timezone}}</span>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
 
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Sun Rise</div>
-          <span style="margin-left:10%;">{{sunRise}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Ground Level</div>
-          <span style="margin-left:30%;">{{groundLevel}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Clouds</div>
-          <span style="margin-left:10%;">{{clouds}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Sunset</div>
-          <span style="margin-left:10%;">{{sunset}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Country</div>
-          <span style="margin-left:10%;">{{country}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Wind</div>
-          <span style="margin-left:10%;">{{wind}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Temperature (Max)</div>
-          <span style="margin-left:10%;">{{tempMax}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Timezone</div>
-          <span style="margin-left:10%;">{{timezone}}</span>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="1" rowspan="1">
-        <div>
-          <div style="font-weight: 500; color:gray">Temperature (Min)</div>
-          <span style="margin-left:10%;">{{tempMin}}</span>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <div class="weather-result-elements">
+              <div  class="weather-result-element-name">Temperature (Min)</div>
+              <span class="weather-result-element-value">{{tempMin}}</span>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      <div class="weather-result">
+        <mat-grid-list cols="1" rowHeight="50px"  gutterSize="5px">
+          <mat-grid-tile colspan="1" rowspan="1" class="box-header">
+            <div class="box-header-title">Graph</div>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="4">
+            <app-graph  style="height:100%;width:80%"></app-graph>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

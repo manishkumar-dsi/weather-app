@@ -11,10 +11,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    GraphComponent,
   ],
   imports: [
     BrowserModule,
