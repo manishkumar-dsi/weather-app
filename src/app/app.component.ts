@@ -44,17 +44,40 @@ export class AppComponent {
 
   constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef){}
 
+  private getTime(timestamp: number) {
+    const date: Date = new Date(timestamp * 1000);
+    let hours = date.getHours();
+    // Minutes part from the timestamp
+    let minutes = "0" + date.getMinutes();
+    // Seconds part from the timestamp
+    let seconds = "0" + date.getSeconds();
+    // Will display time in 10:30:23 format
+    return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+  }
+
+  getTimezone(secs: number) {
+    let temp = new Date(secs * 1000).toISOString().substring(11, 16);
+    if (secs>=0) {
+      return '+' + String(temp);
+    } else {
+      return '-' + String(temp);
+    }
+  }
+
   private setModelData(data: WeatherResponse) {
-    this.groundLevel = String(data.main.grnd_level);
-    this.seaLevel = String(data.main.sea_level);
-    this.tempMax = String(data.main.temp_max);
-    this.sunRise = String(data.sys.sunrise);
-    this.clouds = String(data.clouds.all);
-    this.sunset = String(data.sys.sunset);
-    this.country = String(data.sys.country);
-    this.wind = String(data.wind.speed);
-    this.tempMin = String(data.main.temp_min);
-    this.timezone = String(data.timezone);
+    const sunRise: Date = new Date(data.sys.sunrise * 1000);
+    const sunSet: Date = new Date(data.sys.sunset * 1000);
+
+    this.groundLevel = data.main.grnd_level !== undefined ? String(data.main.grnd_level): '-';
+    this.seaLevel = data.main.sea_level !== undefined ? String(data.main.sea_level): '-';
+    this.tempMax = data.main.temp_max !== undefined ? String(data.main.temp_max): '-';
+    this.sunRise = data.sys.sunrise !== undefined ? String(this.getTime(data.sys.sunrise)): '-';
+    this.clouds = data.clouds.all !== undefined ? String(data.clouds.all): '-';
+    this.sunset = data.sys.sunset !== undefined ? String(this.getTime(data.sys.sunset)): '-';
+    this.country = data.sys.country !== undefined ? String(data.sys.country): '-';
+    this.wind = data.wind.speed !== undefined ? String(data.wind.speed): '-';
+    this.tempMin = data.main.temp_min !== undefined ? String(data.main.temp_min): '-';
+    this.timezone = data.timezone !== undefined ? this.getTimezone(data.timezone): '-';
     this.changeDetectorRef.detectChanges();
   }
 

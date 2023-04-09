@@ -38,5 +38,11 @@
 }
 
 .weather-result-element-value{
-  margin-left:30%;
+  margin-left:20%;
+  font-weight: 200;
+  font-size: 12px;
+}
+.weather-result-element-metric{
+  font-weight: 200;
+  font-size: 12px;
 }

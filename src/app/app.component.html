@@ -28,18 +28,18 @@
       <div class="weather-result">
         <mat-grid-list cols="3" rowHeight="50px" gutterSize="5px">
           <mat-grid-tile colspan="3" rowspan="1" class="box-header">
-              <div class="box-header-title">Search result</div>
+              <div class="box-header-title">Weather details</div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="1">
             <div class="weather-result-elements">
               <div class="weather-result-element-name">Sea Level</div>
-              <span class="weather-result-element-value">{{seaLevel}}</span>
+              <span class="weather-result-element-value">{{seaLevel}}</span><span class="weather-result-element-metric" *ngIf="seaLevel && seaLevel != '-'">&nbsp;hPA</span>
             </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="1">
             <div class="weather-result-elements">
               <div  class="weather-result-element-name">Rain</div>
-              <span class="weather-result-element-value">{{rain}}</span>
+              <span class="weather-result-element-value">{{rain}}</span><span class="weather-result-element-metric" *ngIf="rain &&  rain != '-'">&nbsp;mm/hr</span>
             </div>
           </mat-grid-tile>
 
@@ -52,7 +52,7 @@
           <mat-grid-tile colspan="1" rowspan="1">
             <div class="weather-result-elements">
               <div  class="weather-result-element-name">Ground Level</div>
-              <span style="margin-left:30%;">{{groundLevel}}</span>
+              <span class="weather-result-element-value">{{groundLevel}}</span><span class="weather-result-element-metric" *ngIf="groundLevel && groundLevel != '-'">&nbsp;hPA</span>
             </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="1">
@@ -76,13 +76,13 @@
           <mat-grid-tile colspan="1" rowspan="1">
             <div class="weather-result-elements">
               <div  class="weather-result-element-name">Wind</div>
-              <span class="weather-result-element-value">{{wind}}</span>
+              <span class="weather-result-element-value">{{wind}}</span><span class="weather-result-element-metric" *ngIf="wind &&  wind != '-'">&nbsp;m/s</span>
             </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="1">
             <div class="weather-result-elements">
               <div  class="weather-result-element-name">Temperature (Max)</div>
-              <span class="weather-result-element-value">{{tempMax}}</span>
+              <span class="weather-result-element-value">{{tempMax}}</span><span class="weather-result-element-metric" *ngIf="tempMax != '-'">&nbsp;&#8451;</span>
             </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="1">
@@ -99,7 +99,7 @@
           <mat-grid-tile colspan="1" rowspan="1">
             <div class="weather-result-elements">
               <div  class="weather-result-element-name">Temperature (Min)</div>
-              <span class="weather-result-element-value">{{tempMin}}</span>
+              <span class="weather-result-element-value">{{tempMin}}</span><span class="weather-result-element-metric" *ngIf="tempMin != '-'">&nbsp;&#8451;</span>
             </div>
           </mat-grid-tile>
         </mat-grid-list>
@@ -109,7 +109,7 @@
       <div class="weather-result">
         <mat-grid-list cols="1" rowHeight="50px"  gutterSize="5px">
           <mat-grid-tile colspan="1" rowspan="1" class="box-header">
-            <div class="box-header-title">Graph</div>
+            <div class="box-header-title">Irradiance (W m-2)</div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="4">
             <app-graph [lat]="latInput" [lon] = "lonInput" style="height:100%;width:80%"></app-graph>

@@ -15,23 +15,32 @@ export class GraphComponent implements OnChanges{
   datasets!: Array<GraphDataSet>;
 
   options = {
-    legend: {
-      text: 'You awesome chart with average line',
-      display: true,
+    "legend": {
+      "text": 'You awesome chart with average line',
+      "display": true,
     },
-    scales: {
-      yAxes: [
+    "scales": {
+      "yAxes": [
         {
-          ticks: {
-            beginAtZero: true,
+          display: true,
+          "scaleLabel": {
+            "display": true,
+            "labelString": 'Irradiance'
+         },
+          "ticks": {
+            "beginAtZero": true,
           },
         },
       ],
-      xAxes: [
+      "xAxes": [
         {
-          ticks: {
-            min: '0',
-            max: '23',
+          "scaleLabel": {
+            "display": true,
+            "labelString": 'Irradiance 11'
+         },
+          "ticks": {
+            "min": '0',
+            "max": '50',
           },
         },
       ],
@@ -46,10 +55,16 @@ export class GraphComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     console.log("Data fetched for graph")
     console.log(this.lat);
+    if (this.lat == '' || this.lon == '') {
+      this.datasets = [
+        { data: [], label: 'total_abs_bak', type: 'line' },
+        { data: [], label: 'total_inc_bak', type: 'line' },
+      ]
+      return
+    }
     let obj = this.appService.fetchGraphData(Number(this.lat), Number(this.lon));
     obj.subscribe((data: GraphData)=>{
 
-      console.log(data);
       this.labels = Object.values(data.labels);
       this.total_abs_bak = Object.values(data.total_abs_back);
       this.total_inc_bak = Object.values(data.total_inc_back);
@@ -59,8 +74,6 @@ export class GraphComponent implements OnChanges{
         { data: this.total_inc_bak, label: 'total_inc_bak', type: 'line' },
       ]
       this.changeDetectorRef.detectChanges();
-      console.log(this.labels);
-      console.log(this.total_abs_bak)
     });
   }
 }

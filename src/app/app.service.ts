@@ -12,16 +12,16 @@ export class AppService {
   constructor(private http: HttpClient,) { }
 
   fetchWeatherByCoordinate(lat: number, lon: number): Observable<WeatherResponse> {
-    console.log(this.openWeatherURL + '?lat=' + lat +'&lon=' + lon + '&appid=' + this.apiKey);
+    console.log(this.openWeatherURL + '?lat=' + lat +'&lon=' + lon + '&units=metric' + '&appid=' + this.apiKey);
     // return this.http.get('${this.openWeatherURL}?lat=${lat}&lon=${lon}&appid=${this.apiKey}`);
-    return this.http.get<WeatherResponse>(this.openWeatherURL + '?lat=' + lat +'&lon=' + lon + '&appid=' + this.apiKey);
+    return this.http.get<WeatherResponse>(this.openWeatherURL + '?lat=' + lat +'&lon=' + lon + '&units=metric' +  '&appid=' + this.apiKey);
   }
 
   fetchWeatherByCity(cityName: string): Observable<WeatherResponse> {
-    return this.http.get<WeatherResponse>(this.openWeatherURL + '?q=' + cityName + '&appid=' + this.apiKey);
+    return this.http.get<WeatherResponse>(this.openWeatherURL + '?q=' + cityName  + '&units=metric' + '&appid=' + this.apiKey);
   }
 
   fetchGraphData(lat: number, lon: number): Observable<GraphData> {
-    return this.http.get<GraphData>('http://manishkumardsi.pythonanywhere.com?lat=' + lat + '&lon=' + lon);
+    return this.http.get<GraphData>('https://manishkumardsi.pythonanywhere.com?lat=' + lat + '&lon=' + lon);
   }
 }
