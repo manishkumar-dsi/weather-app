@@ -105,8 +105,6 @@ export class AppComponent {
    * @returns
    */
   onSubmit() {
-    console.log("Form clicked");
-    console.log(this.weatherSearchForm.value);
     if (this.weatherSearchForm.value.city?.length == 0 && this.weatherSearchForm.value.lat?.length == 0 && this.weatherSearchForm.value.lon?.length == 0) {
       // Empty form. Keep some error message
       return
@@ -116,8 +114,6 @@ export class AppComponent {
       // Search by City
       let obj = this.appService.fetchWeatherByCity(this.weatherSearchForm.value.city);
       obj.subscribe((data: WeatherResponse)=>{
-        console.log("Data fetched by city");
-        console.log(data);
         this.latInput = String(data.coord.lat);
         this.lonInput = String(data.coord.lon);
         this.changeDetectorRef.detectChanges();
