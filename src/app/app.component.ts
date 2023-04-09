@@ -2,20 +2,17 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from './app.service'
 import { WeatherResponse } from './models/weatherData';
-import { GraphComponent } from './graph/graph.component';
+
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 /**
  * This is the App component
  * This is the main component
  */
-
-// export interface Tile {
-//   color: string;
-//   cols: number;
-//   rows: number;
-//   text: string;
-//   value: string;
-// }
 
 @Component({
   selector: 'app-root',
@@ -39,15 +36,23 @@ export class AppComponent {
   timezone: string = '-';
 
   weatherSearchForm = new FormGroup({
-    city: new FormControl({value: '', disabled: false}),
-    lat: new FormControl({value: '', disabled: false}),
-    lon: new FormControl({value: '', disabled: false}),
+    city: new FormControl('', [Validators.pattern('^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$')]),
+    lat: new FormControl('', [Validators.pattern('^[+-]?(([1-8]?[0-9])(\.[0-9]{1,6})?|90(\.0{1,6})?)$')]),
+    lon: new FormControl('', [Validators.pattern('^[+-]?((([1-9]?[0-9]|1[0-7][0-9])(\.[0-9]{1,6})?)|180(\.0{1,6})?)$')]),
   });
+  get city() { return this.weatherSearchForm.get('city'); }
 
   latInput: String = '';
   lonInput: String = '';
 
-  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef){}
+  constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef, private _snackBar: MatSnackBar){}
+
+  openSnackBar(msg: string) {
+    this._snackBar.open(msg, 'X', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
 
   /**
    * Function to convert seconds to hrs & mins format for timestamp
@@ -107,6 +112,7 @@ export class AppComponent {
   onSubmit() {
     if (this.weatherSearchForm.value.city?.length == 0 && this.weatherSearchForm.value.lat?.length == 0 && this.weatherSearchForm.value.lon?.length == 0) {
       // Empty form. Keep some error message
+      this.openSnackBar('Please enter city or coordinates for search');
       return
     }
 
@@ -125,6 +131,7 @@ export class AppComponent {
     if (this.weatherSearchForm.value.lat?.length == 0 || this.weatherSearchForm.value.lon?.length == 0) {
       // Search by coordinates
       // Lat & lon both is required
+      this.openSnackBar('Please enter Coordinates for search');
       return
     }
 

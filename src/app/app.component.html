@@ -4,7 +4,7 @@
     <mat-grid-tile colspan="2" rowspan="1">
       <form [formGroup]="weatherSearchForm"  (ngSubmit)="onSubmit()">
         <div>Search by city:</div>
-        <mat-form-field class="weather-full-width">
+        <mat-form-field class="weather-full-width" >
           <mat-label for="city">City: </mat-label>
           <input matInput id="city" type="text" formControlName="city"  (ngModelChange)="disable()">
         </mat-form-field>
@@ -12,11 +12,11 @@
         <span>or search by Latitude & Longitude:</span>
         <mat-form-field class="weather-full-width">
           <mat-label for="lat">Latitude: </mat-label>
-          <input matInput id="lat" type="number" formControlName="lat"  (ngModelChange)="disable()">
+          <input matInput id="lat" type="text" formControlName="lat"  (ngModelChange)="disable()">
         </mat-form-field>
         <mat-form-field class="weather-full-width">
           <mat-label for="lon">Longitude: </mat-label>
-          <input matInput id="lon" type="number" formControlName="lon"  (ngModelChange)="disable()">
+          <input matInput id="lon" type="text" formControlName="lon"  (ngModelChange)="disable()">
         </mat-form-field>
 
         <button mat-flat-button style="margin-right:20px" color="primary" type="submit" [disabled]="!weatherSearchForm.valid">Search</button>
@@ -109,7 +109,7 @@
       <div class="weather-result">
         <mat-grid-list cols="1" rowHeight="50px"  gutterSize="5px">
           <mat-grid-tile colspan="1" rowspan="1" class="box-header">
-            <div class="box-header-title">Irradiance [W m<sup>-2</sup>]</div>
+            <div class="box-header-title">Irradiance [W m<sup>-2</sup>] per Hrs.</div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="4">
             <app-graph [lat]="latInput" [lon] = "lonInput" style="height:100%;width:80%"></app-graph>

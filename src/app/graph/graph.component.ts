@@ -28,10 +28,6 @@ export class GraphComponent implements OnChanges {
    * Configuration for the ng2 chart
    */
   options = {
-    legend: {
-      text: 'You awesome chart with average line',
-      display: true,
-    },
     scales: {
       y: {
           display: true,
