@@ -1,7 +1,10 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AppService } from '../app.service';
 import { GraphData, GraphDataSet } from '../models/weatherData';
-
+/**
+ * This is graph component.
+ * It is using ng2-charts for the graph
+ */
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
@@ -14,6 +17,9 @@ export class GraphComponent implements OnChanges{
 
   datasets!: Array<GraphDataSet>;
 
+  /**
+   * Configuration for the ng2 chart
+   */
   options = {
     "legend": {
       "text": 'You awesome chart with average line',
@@ -53,8 +59,7 @@ export class GraphComponent implements OnChanges{
   constructor(private appService: AppService, private changeDetectorRef: ChangeDetectorRef){}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("Data fetched for graph")
-    console.log(this.lat);
+    /* If passed longitude or latitude is empty then return an empty graph data */
     if (this.lat == '' || this.lon == '') {
       this.datasets = [
         { data: [], label: 'total_abs_bak', type: 'line' },
@@ -62,6 +67,9 @@ export class GraphComponent implements OnChanges{
       ]
       return
     }
+    /**
+     * fetch graph data
+    */
     let obj = this.appService.fetchGraphData(Number(this.lat), Number(this.lon));
     obj.subscribe((data: GraphData)=>{
 
