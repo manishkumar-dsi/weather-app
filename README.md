@@ -11,9 +11,11 @@ Please find the app screenshot:
 image.png
 
 2) Search by city:
-image.png
 
-3) Search by Latitude or Longitude
+   
+![alt text](https://raw.githubusercontent.com/manishkumar-dsi/weather-app/master/img/city.jpg)
+
+4) Search by Latitude or Longitude
 
 image.png
 
