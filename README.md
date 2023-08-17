@@ -8,16 +8,19 @@ This project has been developed using Angular and Python. I have used ng2-charts
 Please find the app screenshot:
 
 1) Default page:
-image.png
+
+![alt text](https://raw.githubusercontent.com/manishkumar-dsi/weather-app/master/img/default.jpg)
+
 
 2) Search by city:
 
    
 ![alt text](https://raw.githubusercontent.com/manishkumar-dsi/weather-app/master/img/city.jpg)
 
-4) Search by Latitude or Longitude
+3) Search by Latitude or Longitude
 
-image.png
+
+![alt text](https://raw.githubusercontent.com/manishkumar-dsi/weather-app/master/img/latlang.jpg)
 
 ## Development server
 
